@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:cardBackgroundColor="#DBD6D6"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:cardUseCompatPadding="true"
+    card_view:elevation="5dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:src="@drawable/logo"
+                    android:padding="5dp"
+                    android:background="@drawable/bac_white"
+                    android:layout_height="50dp"/>
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="-2dp"
+                android:layout_width="match_parent"
+                android:text="اقتباسات "
+                android:textColor="#1B4358"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:fontFamily="@font/fooo"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_height="30dp">
+                    <ImageView
+                        android:src="@drawable/ic_right_quote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/t3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-3dp"
+                    android:fontFamily="@font/jazeera"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:padding="1dp"
+                    android:text="سبحان الله والحمد لله"
+                    android:textColor="#000"
+                    android:textSize="13sp">
+
+                </TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="30dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/shareS"
+                                android:layout_width="26dp"
+                                android:padding="1dp"
+                                android:paddingEnd="2dp"
+                                android:layout_margin="1dp"
+                                android:src="@drawable/ic_share_s"
+                                android:layout_height="26dp"/>
+                            <ImageView
+                                android:id="@+id/copyS"
+                                android:layout_width="26dp"
+                                android:padding="1dp"
+                                android:layout_margin="1dp"
+                                android:src="@drawable/ic_copy_item"
+                                android:layout_height="26dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:src="@drawable/ic_left_quote"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</androidx.cardview.widget.CardView>
