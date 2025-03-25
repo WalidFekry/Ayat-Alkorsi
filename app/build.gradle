@@ -9,16 +9,18 @@ android {
     defaultConfig {
         applicationId "com.walid.ayatalkorsi"
         minSdkVersion 19
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode 12
         versionName "1.6"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
+        resources {
+            excludes += ['META-INF/DEPENDENCIES']
+        }
     }
+
 
     buildTypes {
         release {
@@ -35,6 +37,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.walid.ayatalkorsi'
 }
 
 dependencies {
