@@ -1,68 +1,43 @@
 package com.walid.ayatalkorsi;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageButton;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 
 public class AyaText extends AppCompatActivity {
 
-    TextView ayakortxt;
-    Button btnup, btndown, btnstar;
-    AppCompatImageButton a;
+    private TextView ayakortxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_aya_text);
 
-        btnup = (Button) findViewById(R.id.btn_up);
-        btndown = (Button) findViewById(R.id.btn_down);
-        btnstar = (Button) findViewById(R.id.btn_star);
-        ayakortxt = (TextView) findViewById(R.id.ayakortxt);
+        ayakortxt = findViewById(R.id.ayakortxt);
+        AppCompatButton btnUp = findViewById(R.id.btn_up);
+        AppCompatButton btnDown = findViewById(R.id.btn_down);
+        AppCompatButton btnStar = findViewById(R.id.btn_star);
+        AppCompatImageButton backButton = findViewById(R.id.back_button);
 
+        backButton.setOnClickListener(v -> finish());
 
-        a = findViewById(R.id.back_button);
-        a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        btnup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ayakortxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, (ayakortxt.getTextSize() + 2f));
-            }
-        });
+        btnUp.setOnClickListener(v -> changeTextSize(2f));
+        btnDown.setOnClickListener(v -> changeTextSize(-2f));
+        btnStar.setOnClickListener(v -> openUrl());
+    }
 
-        btndown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ayakortxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, (ayakortxt.getTextSize() - 2f));
+    private void changeTextSize(float sizeDelta) {
+        ayakortxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, ayakortxt.getTextSize() + sizeDelta);
+    }
 
-            }
-        });
-
-        btnstar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.co/2xVh8rqVLS")));
-
-            }
-        });
-
+    private void openUrl() {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi")));
     }
 }

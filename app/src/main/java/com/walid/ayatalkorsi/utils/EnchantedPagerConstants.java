@@ -1,4 +1,4 @@
-package com.walid.ayatalkorsi.Util;
+package com.walid.ayatalkorsi.utils;
 
 
 public class EnchantedPagerConstants {

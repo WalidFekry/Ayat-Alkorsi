@@ -8,115 +8,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.cardview.widget.CardView;
 
-
 public class Listen extends AppCompatActivity {
-
-    CardView cardView1;
-    AppCompatImageButton a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listen);
 
-        a = findViewById(R.id.back_button);
-        a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        AppCompatImageButton backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> finish());
 
-        cardView1 = findViewById(R.id.yasser);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity2.class);
-                startActivity(intent);
-            }
-        });
+        Object[][] cardViewMappings = {
+                {R.id.yasser, MainActivity2.class},
+                {R.id.khaled, MainActivity3.class},
+                {R.id.fares, MainActivity4.class},
+                {R.id.saad, MainActivity5.class},
+                {R.id.abdo, MainActivity6.class},
+                {R.id.abdo2, MainActivity7.class},
+                {R.id.men, MainActivity8.class},
+                {R.id.nasser, MainActivity9.class},
+                {R.id.islam, MainActivity10.class},
+                {R.id.rashed, MainActivity11.class}
+        };
 
-        cardView1 = findViewById(R.id.khaled);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity3.class);
-                startActivity(intent);
-            }
-        });
+        for (Object[] mapping : cardViewMappings) {
+            int cardViewId = (int) mapping[0];
+            Class<?> targetActivity = (Class<?>) mapping[1];
+            setupCardView(cardViewId, targetActivity);
+        }
+    }
 
-        cardView1 = findViewById(R.id.fares);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity4.class);
-                startActivity(intent);
-            }
-        });
-
-        cardView1 = findViewById(R.id.saad);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity5.class);
-                startActivity(intent);
-            }
-        });
-
-        cardView1 = findViewById(R.id.abdo);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity6.class);
-                startActivity(intent);
-            }
-        });
-
-        cardView1 = findViewById(R.id.abdo2);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity7.class);
-                startActivity(intent);
-            }
-        });
-
-        cardView1 = findViewById(R.id.men);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity8.class);
-                startActivity(intent);
-            }
-        });
-
-        cardView1 = findViewById(R.id.nasser);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity9.class);
-                startActivity(intent);
-            }
-        });
-
-        cardView1 = findViewById(R.id.islam);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity10.class);
-                startActivity(intent);
-            }
-        });
-
-        cardView1 = findViewById(R.id.rashed);
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Listen.this, MainActivity11.class);
-                startActivity(intent);
-            }
-        });
-
-
+    private void setupCardView(int cardViewId, Class<?> targetActivity) {
+        CardView cardView = findViewById(cardViewId);
+        if (cardView != null) {
+            cardView.setOnClickListener(v -> startActivity(new Intent(Listen.this, targetActivity)));
+        }
     }
 }

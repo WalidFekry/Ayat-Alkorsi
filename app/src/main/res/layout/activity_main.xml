@@ -38,7 +38,7 @@
                 android:padding="2dp"
                 android:visibility="visible">
 
-                <com.walid.ayatalkorsi.Util.EnchantedViewPager
+                <com.walid.ayatalkorsi.utils.EnchantedViewPager
                     android:id="@+id/viewPager_alphabet"
                     android:layout_width="match_parent"
                     android:layout_height="212dp"

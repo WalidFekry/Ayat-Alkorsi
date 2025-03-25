@@ -1,4 +1,4 @@
-package com.walid.ayatalkorsi.Util;
+package com.walid.ayatalkorsi.utils;
 
 import android.animation.Animator;
 import android.content.Context;
