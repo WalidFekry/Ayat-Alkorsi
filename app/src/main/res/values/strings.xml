@@ -23,4 +23,20 @@
     <string name="aboutapp">تطبيق آية الكرسي مكررة - بدون انترنت 🌸</string>
 
 
+    <string-array name="repeat_options">
+        <item>تكرار دائم</item>
+        <item>1 مرة</item>
+        <item>3 مرات</item>
+        <item>4 مرات</item>
+        <item>5 مرات</item>
+        <item>7 مرات</item>
+        <item>10 مرات</item>
+        <item>15 مرة</item>
+        <item>20 مرة</item>
+        <item>30 مرة</item>
+        <item>50 مرة</item>
+        <item>100 مرة</item>
+    </string-array>
+
+
 </resources>

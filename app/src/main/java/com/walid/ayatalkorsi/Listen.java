@@ -2,7 +2,6 @@ package com.walid.ayatalkorsi;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -19,29 +18,37 @@ public class Listen extends AppCompatActivity {
         backButton.setOnClickListener(v -> finish());
 
         Object[][] cardViewMappings = {
-                {R.id.yasser, MainActivity2.class},
-                {R.id.khaled, MainActivity3.class},
-                {R.id.fares, MainActivity4.class},
-                {R.id.saad, MainActivity5.class},
-                {R.id.abdo, MainActivity6.class},
-                {R.id.abdo2, MainActivity7.class},
-                {R.id.men, MainActivity8.class},
-                {R.id.nasser, MainActivity9.class},
-                {R.id.islam, MainActivity10.class},
-                {R.id.rashed, MainActivity11.class}
+                {R.id.yasser, "ياسر الدوسري", R.drawable.yasser, R.raw.yasser},
+                {R.id.khaled, "خالد الجليل", R.drawable.khaled, R.raw.khaled},
+                {R.id.fares, "فارس عباد", R.drawable.fares, R.raw.fares},
+                {R.id.saad, "سعد الغامدي", R.drawable.saad, R.raw.saad},
+                {R.id.abdo, "عبد الرحمن مسعد", R.drawable.abdo, R.raw.abdo},
+                {R.id.abdo2, "عبد الرحمن السديس", R.drawable.abdo2, R.raw.abdo2},
+                {R.id.men, "محمد صديق المنشاوي", R.drawable.men, R.raw.men},
+                {R.id.nasser, "ناصر القطامي", R.drawable.nasser, R.raw.nasser},
+                {R.id.islam, "إسلام صبحي", R.drawable.islam, R.raw.islam},
+                {R.id.rashed, "راشد العفاسي", R.drawable.rashed, R.raw.rashed}
         };
 
         for (Object[] mapping : cardViewMappings) {
             int cardViewId = (int) mapping[0];
-            Class<?> targetActivity = (Class<?>) mapping[1];
-            setupCardView(cardViewId, targetActivity);
+            String title = (String) mapping[1];
+            int reciterImage = (int) mapping[2];
+            int mediaPlayer = (int) mapping[3];
+            setupCardView(cardViewId, title, reciterImage, mediaPlayer);
         }
     }
 
-    private void setupCardView(int cardViewId, Class<?> targetActivity) {
+    private void setupCardView(int cardViewId, String title, int reciterImage, int mediaPlayer) {
         CardView cardView = findViewById(cardViewId);
         if (cardView != null) {
-            cardView.setOnClickListener(v -> startActivity(new Intent(Listen.this, targetActivity)));
+            cardView.setOnClickListener(v -> {
+                Intent intent = new Intent(Listen.this, MediaPlayerActivity.class);
+                intent.putExtra("TITLE", title);
+                intent.putExtra("RECITER_IMAGE", reciterImage);
+                intent.putExtra("MEDIA_PLAYER", mediaPlayer);
+                startActivity(intent);
+            });
         }
     }
 }

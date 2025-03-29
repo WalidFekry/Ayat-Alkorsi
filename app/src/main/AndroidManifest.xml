@@ -11,20 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="false"
-        tools:replace="android:supportsRtl"
-        android:theme="@style/Theme.AyatAlkorsi">
-        <activity
-            android:name=".MainActivity11"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity10"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity9"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity8"
-            android:exported="false" />
+        android:theme="@style/Theme.AyatAlkorsi"
+        tools:replace="android:supportsRtl">
         <activity
             android:name=".AyaFadl"
             android:exported="false" />
@@ -46,12 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity7" />
-        <activity android:name=".MainActivity6" />
-        <activity android:name=".MainActivity5" />
-        <activity android:name=".MainActivity4" />
-        <activity android:name=".MainActivity3" />
-        <activity android:name=".MainActivity2" />
+        <activity android:name=".MediaPlayerActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

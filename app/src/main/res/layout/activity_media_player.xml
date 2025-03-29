@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.walid.ayatalkorsi.MainActivity2">
+    tools:context="com.walid.ayatalkorsi.MediaPlayerActivity">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -34,8 +34,7 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/arabtype"
                 android:gravity="end"
-                android:text="محمد صديق المنشاوي"
-                android:textSize="40dp" />
+                android:textSize="40sp" />
 
         </LinearLayout>
 
@@ -44,7 +43,7 @@
             android:layout_width="40dp"
             android:layout_height="35dp"
             android:background="@drawable/ic_back_button"
-            android:onClick="onBackClicked" />
+            />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -57,32 +56,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
             <LinearLayout
-                android:padding="5dp"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp">
 
 
-
-
-                <ImageView
-
-                    android:id="@+id/imageView2"
-                    android:scaleType="centerCrop"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/reciter_image"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    app:srcCompat="@drawable/men" />
+                    android:scaleType="centerCrop"
+                     />
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/playlottie"
-                    android:visibility="gone"
                     android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:visibility="gone"
                     app:lottie_autoPlay="true"
                     app:lottie_fileName="play.json"
                     app:lottie_loop="true"
@@ -90,11 +87,11 @@
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/pauselottie"
-                    android:visibility="gone"
                     android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:visibility="gone"
                     app:lottie_autoPlay="true"
                     app:lottie_fileName="pause.json"
                     app:lottie_loop="true"
@@ -102,11 +99,11 @@
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/stoplottie"
-                    android:visibility="visible"
                     android:layout_width="200dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:visibility="visible"
                     app:lottie_autoPlay="true"
                     app:lottie_fileName="stop.json"
                     app:lottie_loop="true"
@@ -123,11 +120,12 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <Switch
-                    android:id="@+id/looping"
+                <Spinner
+                    android:id="@+id/repeat_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/purple_200" />
+                    android:spinnerMode="dropdown"
+                    android:entries="@array/repeat_options" />
 
                 <TextView
                     android:layout_marginStart="10dp"
@@ -135,26 +133,24 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jazeera"
                     android:text="التكرار"
-                    android:textColor="@color/black"
                     android:textSize="20sp" />
-
 
             </LinearLayout>
 
+
             <LinearLayout
-                android:layout_weight="7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="7"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
                     <Button
-                        android:onClick="clkplay"
                         android:id="@+id/playid"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
@@ -165,7 +161,6 @@
                         android:textColor="#FFFFFF" />
 
                     <Button
-                        android:onClick="clkpause"
                         android:id="@+id/pauseid"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
@@ -182,7 +177,6 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/jazeera"
-                        android:onClick="clkstop"
                         android:text="إيقاف"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
