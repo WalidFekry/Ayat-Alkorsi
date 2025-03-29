@@ -10,8 +10,8 @@ android {
         applicationId "com.walid.ayatalkorsi"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 12
-        versionName "1.6"
+        versionCode 13
+        versionName "2.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
