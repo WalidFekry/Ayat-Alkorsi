@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, "آية الكرسي مكررة - بدون انترنت 💙");
-        sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.aboutapp) + "\n\n" + "حمل التطبيق من خلال هذا الرابط أو من متجر جوجل بلاي \uD83D\uDC47  https://t.co/2xVh8rqVLS \n");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.aboutapp) + "\n\n" + "حمل التطبيق من خلال هذا الرابط أو من متجر جوجل بلاي \uD83D\uDC47  https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi \n");
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, "مشاركة التطبيق"));
     }

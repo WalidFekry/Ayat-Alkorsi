@@ -70,13 +70,13 @@ public class CustomViewPagerAdapter extends PagerAdapter {
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.setType("text/plain");
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق آية الكرسي مكررة - بدون انترنت");
-        sendIntent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + "تفضل رابط التطبيق  https://t.co/2xVh8rqVLS");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + "تفضل رابط التطبيق  https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi");
         activity.startActivity(Intent.createChooser(sendIntent, "مشاركة اقتباسات من تطبيق آية الكرسي"));
     }
 
     private void copyToClipboard(String text) {
         ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("", text + "\n\nتم نسخ هذه النصوص من تطبيق آية الكرسي مكررة - بدون انترنت\nhttps://t.co/2xVh8rqVLS");
+        ClipData clip = ClipData.newPlainText("", text + "\n\nتم نسخ هذه النصوص من تطبيق آية الكرسي مكررة - بدون انترنت\nhttps://play.google.com/store/apps/details?id=com.walid.ayatalkorsi");
         clipboard.setPrimaryClip(clip);
         Toast.makeText(activity, "تم نسخ الاقتباس بنجاح", Toast.LENGTH_SHORT).show();
     }
