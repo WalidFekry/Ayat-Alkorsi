@@ -81,9 +81,26 @@ public class MediaPlayerActivity extends AppCompatActivity implements AudioServi
         AppCompatImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(v -> finish());
 
-        playButton.setOnClickListener(v -> startAudioServiceAction(AudioService.ACTION_PLAY));
-        pauseButton.setOnClickListener(v -> startAudioServiceAction(AudioService.ACTION_PAUSE));
-        stopButton.setOnClickListener(v -> startAudioServiceAction(AudioService.ACTION_STOP));
+        playButton.setOnClickListener(v -> {
+            startAudioServiceAction(AudioService.ACTION_PLAY);
+            if (isBound && audioService != null) {
+                audioService.playAudio();
+            }
+        });
+
+        pauseButton.setOnClickListener(v -> {
+            startAudioServiceAction(AudioService.ACTION_PAUSE);
+            if (isBound && audioService != null) {
+                audioService.pauseAudio();
+            }
+        });
+
+        stopButton.setOnClickListener(v -> {
+            startAudioServiceAction(AudioService.ACTION_STOP);
+            if (isBound && audioService != null) {
+                audioService.stopAudio();
+            }
+        });
 
         updateUI(false, false);
     }

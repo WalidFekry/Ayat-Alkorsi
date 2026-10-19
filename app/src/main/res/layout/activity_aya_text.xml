@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     android:background="@drawable/bg2"
     android:fitsSystemWindows="true"
-    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AyaText">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,27 +15,26 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/around_line3"
         app:layout_collapseMode="pin"
-        app:titleTextAppearance="@style/TitleToolBarApppearance"
-        app:popupTheme="@style/TextAppearance.AppCompat">
+        app:popupTheme="@style/TextAppearance.AppCompat"
+        app:titleTextAppearance="@style/TitleToolBarApppearance">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:layout_gravity="end">
-
+            android:layout_gravity="end"
+            android:gravity="end">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/toolbar_title"
+                style="@style/TextAppearance.MyApp.Title.QiblahActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/arabtype"
-                android:textSize="40dp"
-                android:text="قراءة نص"
-                style="@style/TextAppearance.MyApp.Title.QiblahActivity"
-                android:gravity="end"
                 android:layout_gravity="center"
-                android:layout_marginEnd="16dp"/>
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/arabtype"
+                android:gravity="end"
+                android:text="قراءة نص"
+                android:textSize="40dp" />
 
         </LinearLayout>
 
@@ -50,43 +49,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_margin="10dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_up"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/ic_up" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_down"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/ic_down" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_copy_text"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/ic_copy_item" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_star"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/ic_rate" />
 
         </LinearLayout>
@@ -99,10 +99,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@drawable/des00sql"
-            android:layout_margin="10dp"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_margin="10dp"
+            android:background="@drawable/des00sql"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/ayakortxt"
@@ -119,7 +119,7 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:text="@string/ayakortxt"
-                android:textColor="#000"
+                android:textColor="@color/text_primary"
                 android:textSize="22sp"
                 android:textStyle="bold" />
         </LinearLayout>

@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -73,10 +73,10 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:fontFamily="@font/arabtype"
+                        android:gravity="center"
                         android:text="آية الكرسي - سورة البقرة (255)"
                         android:textColor="@color/orange"
                         android:textSize="24sp"
@@ -90,7 +90,7 @@
                         android:fontFamily="@font/jazeera"
                         android:lineSpacingExtra="8dp"
                         android:text="@string/ayakortxt"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -113,8 +113,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/arabtype"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/arabtype"
                         android:gravity="center"
                         android:text="غريب الكلمات ومعاني المفردات"
                         android:textColor="@color/orange"
@@ -128,7 +128,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/jazeera"
                         android:lineSpacingExtra="6dp"
-                        android:textColor="#222222"
+                        android:textColor="@color/text_secondary"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -138,7 +138,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -151,8 +151,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/arabtype"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/arabtype"
                         android:gravity="center"
                         android:text="التفسير الميسر لآية الكرسي"
                         android:textColor="@color/orange"
@@ -166,7 +166,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/jazeera"
                         android:lineSpacingExtra="6dp"
-                        android:textColor="#222222"
+                        android:textColor="@color/text_secondary"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

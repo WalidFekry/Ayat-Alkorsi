@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 import android.media.AudioAttributes;
 import android.media.AudioFocusRequest;
 import android.media.AudioManager;
@@ -32,6 +33,7 @@ public class AudioService extends Service {
     private MediaPlayer mediaPlayer;
     private AudioManager audioManager;
     private AudioFocusRequest audioFocusRequest;
+    private boolean hasAudioFocus = false;
     private final Handler handler = new Handler(Looper.getMainLooper());
 
     private String reciterTitle = "";
@@ -55,6 +57,28 @@ public class AudioService extends Service {
             return AudioService.this;
         }
     }
+
+    private final AudioManager.OnAudioFocusChangeListener audioFocusChangeListener = focusChange -> {
+        switch (focusChange) {
+            case AudioManager.AUDIOFOCUS_LOSS:
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                pauseAudio();
+                break;
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    mediaPlayer.setVolume(0.2f, 0.2f);
+                }
+                break;
+            case AudioManager.AUDIOFOCUS_GAIN:
+                if (mediaPlayer != null) {
+                    mediaPlayer.setVolume(1.0f, 1.0f);
+                    if (isPaused) {
+                        playAudio();
+                    }
+                }
+                break;
+        }
+    };
 
     @Override
     public void onCreate() {
@@ -85,7 +109,6 @@ public class AudioService extends Service {
                 pauseAudio();
             } else if (ACTION_STOP.equals(action)) {
                 stopAudio();
-                stopForeground(true);
                 stopSelf();
             }
         }
@@ -134,50 +157,90 @@ public class AudioService extends Service {
 
     public void playAudio() {
         if (requestAudioFocus()) {
-            if (mediaPlayer == null) {
-                mediaPlayer = MediaPlayer.create(this, mediaPlayerResId);
-                if (mediaPlayer == null) return;
-                completedRepeats = 0;
-                mediaPlayer.setOnCompletionListener(mp -> {
-                    completedRepeats++;
-                    notifyCallback();
-                    if (repeatCount == -1 || completedRepeats < repeatCount) {
+            try {
+                if (mediaPlayer == null) {
+                    createAndPrepareMediaPlayer();
+                }
+                if (mediaPlayer != null) {
+                    mediaPlayer.setVolume(1.0f, 1.0f);
+                    mediaPlayer.start();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                createAndPrepareMediaPlayer();
+                if (mediaPlayer != null) {
+                    try {
                         mediaPlayer.start();
-                        updateNotification();
-                    } else {
-                        isPlaying = false;
-                        isPaused = false;
-                        notifyCallback();
-                        updateNotification();
-                        stopForeground(false);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        return;
                     }
-                });
+                } else {
+                    return;
+                }
             }
 
-            mediaPlayer.start();
             isPlaying = true;
             isPaused = false;
-            startForeground(NOTIFICATION_ID, buildNotification());
+            startForegroundServiceNotification();
             notifyCallback();
         }
     }
 
-    public void pauseAudio() {
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-            isPlaying = false;
-            isPaused = true;
-            notifyCallback();
-            updateNotification();
-            stopForeground(false);
+    private void createAndPrepareMediaPlayer() {
+        if (mediaPlayer != null) {
+            try {
+                mediaPlayer.release();
+            } catch (Exception ignored) {}
+            mediaPlayer = null;
         }
+        mediaPlayer = MediaPlayer.create(this, mediaPlayerResId);
+        if (mediaPlayer != null) {
+            completedRepeats = 0;
+            mediaPlayer.setOnCompletionListener(mp -> {
+                completedRepeats++;
+                notifyCallback();
+                if (repeatCount == -1 || completedRepeats < repeatCount) {
+                    mediaPlayer.start();
+                    updateNotification();
+                } else {
+                    isPlaying = false;
+                    isPaused = false;
+                    notifyCallback();
+                    updateNotification();
+                    stopForegroundService(false);
+                }
+            });
+        }
+    }
+
+    public void pauseAudio() {
+        if (mediaPlayer != null) {
+            try {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        isPlaying = false;
+        isPaused = true;
+        abandonAudioFocus();
+        notifyCallback();
+        updateNotification();
+        stopForegroundService(false);
     }
 
     public void stopAudio() {
         cancelSleepTimer();
         if (mediaPlayer != null) {
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.stop();
+            try {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             mediaPlayer.release();
             mediaPlayer = null;
@@ -187,7 +250,7 @@ public class AudioService extends Service {
         completedRepeats = 0;
         abandonAudioFocus();
         notifyCallback();
-        stopForeground(true);
+        stopForegroundService(true);
     }
 
     public void setSleepTimer(long minutes) {
@@ -205,6 +268,27 @@ public class AudioService extends Service {
         }
     }
 
+    private void startForegroundServiceNotification() {
+        Notification notification = buildNotification();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            try {
+                startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
+            } catch (Exception e) {
+                startForeground(NOTIFICATION_ID, notification);
+            }
+        } else {
+            startForeground(NOTIFICATION_ID, notification);
+        }
+    }
+
+    private void stopForegroundService(boolean removeNotification) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            stopForeground(removeNotification ? STOP_FOREGROUND_REMOVE : STOP_FOREGROUND_DETACH);
+        } else {
+            stopForeground(removeNotification);
+        }
+    }
+
     private void notifyCallback() {
         if (callback != null) {
             callback.onPlaybackStateChanged(isPlaying, isPaused, completedRepeats, repeatCount);
@@ -212,34 +296,38 @@ public class AudioService extends Service {
     }
 
     private boolean requestAudioFocus() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .build();
-            audioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
-                    .setAudioAttributes(audioAttributes)
-                    .setOnAudioFocusChangeListener(focusChange -> {
-                        if (focusChange == AudioManager.AUDIOFOCUS_LOSS || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
-                            pauseAudio();
-                        }
-                    })
-                    .build();
-            return audioManager.requestAudioFocus(audioFocusRequest) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
-        } else {
-            return audioManager.requestAudioFocus(focusChange -> {
-                if (focusChange == AudioManager.AUDIOFOCUS_LOSS || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
-                    pauseAudio();
-                }
-            }, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED;
+        if (hasAudioFocus) {
+            return true;
         }
+        int result;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (audioFocusRequest == null) {
+                AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build();
+                audioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+                        .setAudioAttributes(audioAttributes)
+                        .setAcceptsDelayedFocusGain(false)
+                        .setOnAudioFocusChangeListener(audioFocusChangeListener)
+                        .build();
+            }
+            result = audioManager.requestAudioFocus(audioFocusRequest);
+        } else {
+            result = audioManager.requestAudioFocus(audioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+        }
+        hasAudioFocus = (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
+        return hasAudioFocus;
     }
 
     private void abandonAudioFocus() {
-        if (audioManager != null) {
+        if (audioManager != null && hasAudioFocus) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && audioFocusRequest != null) {
                 audioManager.abandonAudioFocusRequest(audioFocusRequest);
+            } else {
+                audioManager.abandonAudioFocus(audioFocusChangeListener);
             }
+            hasAudioFocus = false;
         }
     }
 
@@ -265,6 +353,14 @@ public class AudioService extends Service {
         }
     }
 
+    private PendingIntent getServicePendingIntent(int requestCode, Intent intent, int flags) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return PendingIntent.getForegroundService(this, requestCode, intent, flags);
+        } else {
+            return PendingIntent.getService(this, requestCode, intent, flags);
+        }
+    }
+
     private Notification buildNotification() {
         Intent openIntent = new Intent(this, MediaPlayerActivity.class);
         openIntent.putExtra("TITLE", reciterTitle);
@@ -280,15 +376,19 @@ public class AudioService extends Service {
 
         Intent playIntent = new Intent(this, AudioService.class);
         playIntent.setAction(ACTION_PLAY);
-        PendingIntent playPendingIntent = PendingIntent.getService(this, 1, playIntent, flags);
+        playIntent.putExtra("TITLE", reciterTitle);
+        playIntent.putExtra("RECITER_IMAGE", reciterImageResId);
+        playIntent.putExtra("MEDIA_PLAYER", mediaPlayerResId);
+        playIntent.putExtra("REPEAT_COUNT", repeatCount);
+        PendingIntent playPendingIntent = getServicePendingIntent(1, playIntent, flags);
 
         Intent pauseIntent = new Intent(this, AudioService.class);
         pauseIntent.setAction(ACTION_PAUSE);
-        PendingIntent pausePendingIntent = PendingIntent.getService(this, 2, pauseIntent, flags);
+        PendingIntent pausePendingIntent = getServicePendingIntent(2, pauseIntent, flags);
 
         Intent stopIntent = new Intent(this, AudioService.class);
         stopIntent.setAction(ACTION_STOP);
-        PendingIntent stopPendingIntent = PendingIntent.getService(this, 3, stopIntent, flags);
+        PendingIntent stopPendingIntent = getServicePendingIntent(3, stopIntent, flags);
 
         String subtitle;
         if (repeatCount == -1) {

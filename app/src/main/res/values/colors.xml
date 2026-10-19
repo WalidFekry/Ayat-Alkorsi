@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="orange">#e66f31</color>
     <color name="unselect_indicater">#B3B3B3</color>
+
+    <!-- Theme-adaptive colors for Light/Dark mode -->
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#444444</color>
+    <color name="card_background">#FFFFFF</color>
 </resources>

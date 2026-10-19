@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -74,8 +74,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/arabtype"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/arabtype"
                         android:gravity="center"
                         android:text="آية الكرسي دبر كل صلاة مكتوبة"
                         android:textColor="@color/orange"
@@ -89,7 +89,7 @@
                         android:fontFamily="@font/jazeera"
                         android:lineSpacingExtra="6dp"
                         android:text="@string/ayakortxt"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <TextView
@@ -98,7 +98,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/jazeera"
                         android:text="الفضل: «من قرأ آية الكرسي دبر كل صلاة مكتوبة لم يمنعه من دخول الجنة إلا أن يموت»."
-                        android:textColor="#555555"
+                        android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
 
                     <Button
@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -131,8 +131,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/arabtype"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/arabtype"
                         android:gravity="center"
                         android:text="آية الكرسي في أذكار الصباح والمساء"
                         android:textColor="@color/orange"
@@ -146,7 +146,7 @@
                         android:fontFamily="@font/jazeera"
                         android:lineSpacingExtra="6dp"
                         android:text="@string/ayakortxt"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <TextView
@@ -155,7 +155,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/jazeera"
                         android:text="الفضل: من قالها حين يصبح أُجير من الجن حتى يمسي، ومن قالها حين يمسي أُجير منهم حتى يصبح."
-                        android:textColor="#555555"
+                        android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
 
                     <Button
@@ -175,7 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -189,8 +189,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="center"
                         android:fontFamily="@font/arabtype"
+                        android:gravity="center"
                         android:text="أذكار قبل النوم (آية الكرسي والمعوذتان)"
                         android:textColor="@color/orange"
                         android:textSize="24sp"
@@ -203,7 +203,7 @@
                         android:fontFamily="@font/jazeera"
                         android:lineSpacingExtra="6dp"
                         android:text="اقرأ آية الكرسي، وسورة الإخلاص، والفلق، والناس قبل النوم."
-                        android:textColor="#000000"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <TextView
@@ -212,7 +212,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/jazeera"
                         android:text="الفضل: «إذا أويت إلى فراشك فاقرأ آية الكرسي، لن يزال عليك من الله حافظ ولا يقربك شيطان حتى تصبح»."
-                        android:textColor="#555555"
+                        android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
 
                     <Button
@@ -229,7 +229,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="64dp"/>
+                android:layout_height="64dp" />
 
         </LinearLayout>
     </ScrollView>

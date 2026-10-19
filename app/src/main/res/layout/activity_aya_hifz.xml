@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -76,8 +76,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="center"
                         android:fontFamily="@font/jazeera"
+                        android:gravity="center"
                         android:text="تقدم الحفظ: 0 من 5 أجزاء"
                         android:textColor="@color/orange"
                         android:textSize="18sp"
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -114,8 +114,8 @@
                         android:id="@+id/segment_title_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/arabtype"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/arabtype"
                         android:gravity="center"
                         android:text="الجزء الأول (1 من 5)"
                         android:textColor="@color/orange"
@@ -126,12 +126,12 @@
                         android:id="@+id/segment_content_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginTop="12dp"
                         android:fontFamily="@font/jazeera"
-                        android:layout_gravity="center"
                         android:gravity="center"
                         android:lineSpacingExtra="8dp"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_primary"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
@@ -199,7 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -221,7 +221,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="64dp"/>
+                android:layout_height="64dp" />
 
         </LinearLayout>
     </ScrollView>
