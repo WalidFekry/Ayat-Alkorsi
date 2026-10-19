@@ -1,7 +1,6 @@
 package com.walid.ayatalkorsi;
 
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -14,6 +13,8 @@ public class AyaPic extends AppCompatActivity {
         setContentView(R.layout.activity_aya_pic);
 
         AppCompatImageButton backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        if (backButton != null) {
+            backButton.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        }
     }
 }

@@ -26,6 +26,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
 
     private int repeatCount = -1;
     private int currentRepeat = 0;
+    private boolean isInitialSpinnerSelection = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,6 @@ public class MediaPlayerActivity extends AppCompatActivity {
         reciterImage = findViewById(R.id.reciter_image);
 
         getData();
-
         setupSpinner();
 
         AppCompatImageButton backButton = findViewById(R.id.back_button);
@@ -62,61 +62,69 @@ public class MediaPlayerActivity extends AppCompatActivity {
     private void getData() {
         String reciterName = getIntent().getStringExtra("TITLE");
         int reciterImageResId = getIntent().getIntExtra("RECITER_IMAGE", R.drawable.islam);
-        int mediaPlayer = getIntent().getIntExtra("MEDIA_PLAYER", R.raw.islam);
-        toolbarTitle.setText(reciterName);
+        mediaPlayerResId = getIntent().getIntExtra("MEDIA_PLAYER", R.raw.islam);
+
+        if (reciterName != null) {
+            toolbarTitle.setText(reciterName);
+        }
         reciterImage.setImageResource(reciterImageResId);
-        mediaPlayerResId = mediaPlayer;
     }
 
     private void setupSpinner() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.repeat_options, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.repeat_options, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         repeatSpinner.setAdapter(adapter);
 
         repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selected = parent.getItemAtPosition(position).toString();
-                switch (selected) {
-                    case "1 مرة":
+                switch (position) {
+                    case 0:
                         repeatCount = 1;
                         break;
-                    case "3 مرات":
+                    case 1:
                         repeatCount = 3;
                         break;
-                    case "4 مرات":
+                    case 2:
                         repeatCount = 4;
                         break;
-                    case "5 مرات":
+                    case 3:
                         repeatCount = 5;
                         break;
-                    case "7 مرات":
+                    case 4:
                         repeatCount = 7;
                         break;
-                    case "10 مرات":
+                    case 5:
                         repeatCount = 10;
                         break;
-                    case "15 مرة":
+                    case 6:
                         repeatCount = 15;
                         break;
-                    case "20 مرة":
+                    case 7:
                         repeatCount = 20;
                         break;
-                    case "30 مرة":
+                    case 8:
                         repeatCount = 30;
                         break;
-                    case "50 مرة":
+                    case 9:
                         repeatCount = 50;
                         break;
-                    case "100 مرة":
+                    case 10:
                         repeatCount = 100;
                         break;
-                    case "تكرار دائم":
+                    case 11:
+                    default:
                         repeatCount = -1;
                         break;
                 }
 
-                Toast.makeText(MediaPlayerActivity.this, "عدد التكرارات: " + selected, Toast.LENGTH_SHORT).show();
+                if (isInitialSpinnerSelection) {
+                    isInitialSpinnerSelection = false;
+                } else {
+                    String selected = parent.getItemAtPosition(position).toString();
+                    Toast.makeText(MediaPlayerActivity.this, "عدد التكرارات: " + selected, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -129,6 +137,7 @@ public class MediaPlayerActivity extends AppCompatActivity {
     private void playMedia() {
         if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(this, mediaPlayerResId);
+            if (mediaPlayer == null) return;
             mediaPlayer.setOnCompletionListener(mp -> {
                 if (repeatCount == -1 || ++currentRepeat < repeatCount) {
                     mediaPlayer.start();
@@ -169,11 +178,16 @@ public class MediaPlayerActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            pauseMedia();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopMedia();
         super.onDestroy();
     }
 }

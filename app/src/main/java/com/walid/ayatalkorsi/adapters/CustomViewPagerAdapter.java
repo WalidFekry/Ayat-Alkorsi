@@ -41,24 +41,39 @@ public class CustomViewPagerAdapter extends PagerAdapter {
         ImageView shareS = itemView.findViewById(R.id.shareS);
         ImageView copyS = itemView.findViewById(R.id.copyS);
 
-        t3.setText(sliderItems.get(position).getT3());
+        if (t3 != null && position < sliderItems.size()) {
+            t3.setText(sliderItems.get(position).getT3());
+        }
 
-        shareS.setOnClickListener(v -> shareText(sliderItems.get(position).getT3()));
-        copyS.setOnClickListener(v -> copyToClipboard(sliderItems.get(position).getT3()));
+        if (shareS != null) {
+            shareS.setOnClickListener(v -> {
+                if (position < sliderItems.size()) {
+                    shareText(sliderItems.get(position).getT3());
+                }
+            });
+        }
+
+        if (copyS != null) {
+            copyS.setOnClickListener(v -> {
+                if (position < sliderItems.size()) {
+                    copyToClipboard(sliderItems.get(position).getT3());
+                }
+            });
+        }
 
         itemView.setTag(EnchantedViewPager.ENCHANTED_VIEWPAGER_POSITION + position);
-        container.addView(itemView, 0);
+        container.addView(itemView);
         return itemView;
     }
 
     @Override
     public int getCount() {
-        return sliderItems.size();
+        return sliderItems != null ? sliderItems.size() : 0;
     }
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view.equals(object);
+        return view == object;
     }
 
     @Override
@@ -67,17 +82,27 @@ public class CustomViewPagerAdapter extends PagerAdapter {
     }
 
     private void shareText(String text) {
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        sendIntent.setType("text/plain");
-        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق آية الكرسي مكررة - بدون انترنت");
-        sendIntent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + "تفضل رابط التطبيق  https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi");
-        activity.startActivity(Intent.createChooser(sendIntent, "مشاركة اقتباسات من تطبيق آية الكرسي"));
+        try {
+            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+            sendIntent.setType("text/plain");
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "تطبيق آية الكرسي مكررة - بدون انترنت");
+            sendIntent.putExtra(Intent.EXTRA_TEXT, text + "\n\n" + "تفضل رابط التطبيق  https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi");
+            activity.startActivity(Intent.createChooser(sendIntent, "مشاركة اقتباسات من تطبيق آية الكرسي"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void copyToClipboard(String text) {
-        ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("", text + "\n\nتم نسخ هذه النصوص من تطبيق آية الكرسي مكررة - بدون انترنت\nhttps://play.google.com/store/apps/details?id=com.walid.ayatalkorsi");
-        clipboard.setPrimaryClip(clip);
-        Toast.makeText(activity, "تم نسخ الاقتباس بنجاح", Toast.LENGTH_SHORT).show();
+        try {
+            ClipboardManager clipboard = (ClipboardManager) activity.getSystemService(Context.CLIPBOARD_SERVICE);
+            if (clipboard != null) {
+                ClipData clip = ClipData.newPlainText("AyatAlkorsiQuote", text + "\n\nتم نسخ هذه النصوص من تطبيق آية الكرسي مكررة - بدون انترنت\nhttps://play.google.com/store/apps/details?id=com.walid.ayatalkorsi");
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(activity, "تم نسخ الاقتباس بنجاح", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

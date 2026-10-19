@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
@@ -11,8 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="false"
-        android:theme="@style/Theme.AyatAlkorsi"
-        tools:replace="android:supportsRtl">
+        tools:replace="android:supportsRtl"
+        android:theme="@style/Theme.AyatAlkorsi">
         <activity
             android:name=".AyaFadl"
             android:exported="false" />
@@ -34,7 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MediaPlayerActivity" />
+        <activity
+            android:name=".MediaPlayerActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

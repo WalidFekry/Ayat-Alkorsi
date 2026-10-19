@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,18 +25,36 @@ public class AyaText extends AppCompatActivity {
         AppCompatButton btnStar = findViewById(R.id.btn_star);
         AppCompatImageButton backButton = findViewById(R.id.back_button);
 
-        backButton.setOnClickListener(v -> finish());
+        if (backButton != null) {
+            backButton.setOnClickListener(v -> finish());
+        }
 
-        btnUp.setOnClickListener(v -> changeTextSize(2f));
-        btnDown.setOnClickListener(v -> changeTextSize(-2f));
-        btnStar.setOnClickListener(v -> openUrl());
+        if (btnUp != null) {
+            btnUp.setOnClickListener(v -> changeTextSize(2f));
+        }
+        if (btnDown != null) {
+            btnDown.setOnClickListener(v -> changeTextSize(-2f));
+        }
+        if (btnStar != null) {
+            btnStar.setOnClickListener(v -> openUrl());
+        }
     }
 
     private void changeTextSize(float sizeDelta) {
-        ayakortxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, ayakortxt.getTextSize() + sizeDelta);
+        if (ayakortxt != null) {
+            float currentSize = ayakortxt.getTextSize();
+            float newSize = currentSize + sizeDelta;
+            if (newSize >= 14f && newSize <= 100f) {
+                ayakortxt.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
+            }
+        }
     }
 
     private void openUrl() {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi")));
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

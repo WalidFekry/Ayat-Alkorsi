@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import androidx.core.view.MotionEventCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.walid.ayatalkorsi.R;
@@ -123,7 +122,7 @@ public class EnchantedViewPager extends ViewPager {
     public boolean onTouchEvent(MotionEvent event) {
         if (!mUseSwipe) return super.onTouchEvent(event);
 
-        int action = MotionEventCompat.getActionMasked(event);
+        int action = event.getActionMasked();
 
         final int position = getCurrentItem();
         final View currPage = findViewWithTag(ENCHANTED_VIEWPAGER_POSITION + position);
