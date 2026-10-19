@@ -142,34 +142,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id) {
-            case R.id.maktbtiplus:
-                openUrl("https://walid-fekry.com/maktbti-plus/");
-                break;
-
-            case R.id.facegroub:
-                openUrl("https://www.facebook.com/groups/440403217380641");
-                break;
-
-            case R.id.teleee:
-                openUrl("https://t.me/App_Maktbti");
-                break;
-
-            case R.id.ratee:
-                openUrl("https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi");
-                break;
-
-            case R.id.shareee:
-                shareApp();
-                break;
-
-            case R.id.mass:
-                sendEmail();
-                break;
-
-            case R.id.sysa:
-                openUrl("https://sites.google.com/view/ayatalkorsi/home");
-                break;
+        if (id == R.id.maktbtiplus) {
+            openUrl("https://walid-fekry.com/maktbti-plus/");
+        } else if (id == R.id.facegroub) {
+            openUrl("https://www.facebook.com/groups/440403217380641");
+        } else if (id == R.id.teleee) {
+            openUrl("https://t.me/App_Maktbti");
+        } else if (id == R.id.ratee) {
+            openUrl("https://play.google.com/store/apps/details?id=com.walid.ayatalkorsi");
+        } else if (id == R.id.shareee) {
+            shareApp();
+        } else if (id == R.id.mass) {
+            sendEmail();
+        } else if (id == R.id.sysa) {
+            openUrl("https://sites.google.com/view/ayatalkorsi/home");
         }
 
         closeDrawer();
