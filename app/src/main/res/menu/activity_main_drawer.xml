@@ -35,7 +35,7 @@
         <item
             android:id="@+id/sysa"
             android:icon="@drawable/ic_boot"
-            android:title="Privacy Policy - سياسة الخصوصية" />
+            android:title="سياسة الخصوصية" />
 <!--        <item-->
 <!--            android:id="@+id/walidmore"-->
 <!--            android:icon="@drawable/walidmore"-->
