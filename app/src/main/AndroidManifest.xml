@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
@@ -14,6 +16,7 @@
         android:supportsRtl="false"
         tools:replace="android:supportsRtl"
         android:theme="@style/Theme.AyatAlkorsi">
+
         <activity
             android:name=".AyaFadl"
             android:exported="false" />
@@ -24,6 +27,15 @@
             android:name=".AyaPic"
             android:exported="false" />
         <activity
+            android:name=".AyaTafsir"
+            android:exported="false" />
+        <activity
+            android:name=".AyaHifz"
+            android:exported="false" />
+        <activity
+            android:name=".SelectedAzkar"
+            android:exported="false" />
+        <activity
             android:name=".Listen"
             android:exported="false" />
         <activity
@@ -31,16 +43,22 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MediaPlayerActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <service
+            android:name=".AudioService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
 
         <service
             android:name=".MyFirebaseMessagingService"

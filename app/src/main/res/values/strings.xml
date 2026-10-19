@@ -38,5 +38,18 @@
         <item>100 مرة</item>
     </string-array>
 
+    <string-array name="sleep_timer_options">
+        <item>إيقاف المؤقت</item>
+        <item>15 دقيقة</item>
+        <item>30 دقيقة</item>
+        <item>45 دقيقة</item>
+        <item>60 دقيقة</item>
+    </string-array>
+
+    <string name="title_tafsir">التفسير والمعاني</string>
+    <string name="title_hifz">وضع الحفظ والمراجعة</string>
+    <string name="title_azkar">أذكار مختارة</string>
+    <string name="copied_to_clipboard">تم نسخ النص إلى الحافظة</string>
+
 
 </resources>

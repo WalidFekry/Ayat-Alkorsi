@@ -8,7 +8,6 @@
     android:fitsSystemWindows="true"
     tools:context="com.walid.ayatalkorsi.MediaPlayerActivity">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -24,7 +23,6 @@
             android:layout_gravity="end"
             android:gravity="end">
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/toolbar_title"
                 style="@style/TextAppearance.MyApp.Title.QiblahActivity"
@@ -34,7 +32,7 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/arabtype"
                 android:gravity="end"
-                android:textSize="40sp" />
+                android:textSize="36sp" />
 
         </LinearLayout>
 
@@ -42,146 +40,166 @@
             android:id="@+id/back_button"
             android:layout_width="40dp"
             android:layout_height="35dp"
-            android:background="@drawable/ic_back_button"
-            />
+            android:background="@drawable/ic_back_button" />
 
     </androidx.appcompat.widget.Toolbar>
-
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="5dp">
-
+                android:layout_height="260dp"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/reciter_image"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:scaleType="centerCrop"
-                     />
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/playlottie"
-                    android:layout_width="200dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:visibility="gone"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="play.json"
-                    app:lottie_loop="true"
-                    tools:ignore="MissingConstraints" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/playlottie"
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="play.json"
+                app:lottie_loop="true" />
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/pauselottie"
-                    android:layout_width="200dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:visibility="gone"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="pause.json"
-                    app:lottie_loop="true"
-                    tools:ignore="MissingConstraints" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/pauselottie"
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="pause.json"
+                app:lottie_loop="true" />
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/stoplottie"
-                    android:layout_width="200dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:visibility="visible"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="stop.json"
-                    app:lottie_loop="true"
-                    tools:ignore="MissingConstraints" />
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/stoplottie"
+                android:layout_width="160dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="stop.json"
+                app:lottie_loop="true" />
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/repeat_counter_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/jazeera"
+                android:text="التكرار الحالي: 0 من 1"
+                android:textColor="@color/orange"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="6dp">
 
                 <Spinner
                     android:id="@+id/repeat_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
-                    android:entries="@array/repeat_options" />
+                    android:entries="@array/repeat_options"
+                    android:spinnerMode="dropdown" />
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:fontFamily="@font/jazeera"
-                    android:text="التكرار"
-                    android:textSize="20sp" />
-
+                    android:text="عدد التكرارات:"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="7"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="6dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
 
-                    <Button
-                        android:id="@+id/playid"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/jazeera"
-                        android:text="تشغيل"
-                        android:textColor="#FFFFFF" />
 
-                    <Button
-                        android:id="@+id/pauseid"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/jazeera"
-                        android:text="إيقاف مؤقت"
-                        android:textColor="#FFFFFF" />
+                <Spinner
+                    android:id="@+id/sleep_timer_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/sleep_timer_options"
+                    android:spinnerMode="dropdown" />
 
-                    <Button
-                        android:id="@+id/stopid"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/jazeera"
-                        android:text="إيقاف"
-                        android:textColor="#FFFFFF" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/jazeera"
+                    android:text="مؤقت النوم:"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:padding="4dp">
+
+                <Button
+                    android:id="@+id/playid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/jazeera"
+                    android:text="تشغيل"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/pauseid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/jazeera"
+                    android:text="إيقاف مؤقت"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/stopid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/jazeera"
+                    android:text="إيقاف"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

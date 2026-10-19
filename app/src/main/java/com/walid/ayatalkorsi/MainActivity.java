@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -98,6 +99,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.cardView33).setOnClickListener(v -> startActivity(new Intent(this, AyaText.class)));
         findViewById(R.id.cardView55).setOnClickListener(v -> startActivity(new Intent(this, AyaFadl.class)));
         findViewById(R.id.cardView88).setOnClickListener(v -> startActivity(new Intent(this, Listen.class)));
+
+        View cardTafsir = findViewById(R.id.cardViewTafsir);
+        if (cardTafsir != null) {
+            cardTafsir.setOnClickListener(v -> startActivity(new Intent(this, AyaTafsir.class)));
+        }
+
+        View cardHifz = findViewById(R.id.cardViewHifz);
+        if (cardHifz != null) {
+            cardHifz.setOnClickListener(v -> startActivity(new Intent(this, AyaHifz.class)));
+        }
+
+        View cardAzkar = findViewById(R.id.cardViewAzkar);
+        if (cardAzkar != null) {
+            cardAzkar.setOnClickListener(v -> startActivity(new Intent(this, SelectedAzkar.class)));
+        }
     }
 
     private void setupSlider() {
